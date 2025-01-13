@@ -13,7 +13,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
-    provideHttpClient(), // Cliente HTTP
+    provideHttpClient(),
     providePrimeNG({
       theme : {
         preset: Lara,
@@ -27,6 +27,5 @@ export const appConfig: ApplicationConfig = {
       }
     }),
     provideAnimations()
-
   ]
 };

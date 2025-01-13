@@ -19,11 +19,11 @@ import { RouterModule } from '@angular/router';
     InputTextModule,
     RippleModule,
     CommonModule,
-    RouterModule, // Importa RouterModule para habilitar routerLink
+    RouterModule,
   ],
   standalone: true,
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'], // Corregí `styleUrl` por `styleUrls`
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
   items: MenuItem[] = []; // Define los ítems del menú como un array de `MenuItem`
@@ -32,15 +32,15 @@ export class NavbarComponent implements OnInit {
     this.items = [
       {
         label: 'Home',
-        routerLink: '/', // Redirige a la página principal
+        routerLink: '/',
       },
       {
         label: 'About',
-        routerLink: '/about', // Redirige a la página "About"
+        routerLink: '/about',
       },
       {
         label: 'Favorites',
-        routerLink: '/favorites', // Redirige a la página de favoritos
+        routerLink: '/favorites',
       },
     ];
   }

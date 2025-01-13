@@ -5,9 +5,10 @@ import { MessageService } from 'primeng/api';
 import { Toast } from 'primeng/toast';
 import { BadgeModule } from 'primeng/badge';
 import { NavbarComponent } from './navbar/navbar.component';
+import {FooterComponent} from './footer/footer.component';
 @Component({
   selector: 'app-root',
-  imports: [Toast, RouterOutlet, ButtonModule, BadgeModule, NavbarComponent],
+  imports: [Toast, RouterOutlet, ButtonModule, BadgeModule, NavbarComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   providers: [MessageService],

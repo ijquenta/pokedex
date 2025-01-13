@@ -1,1 +1,44 @@
-<p>favorites works!</p>
+
+
+<p-card header="Your Favorite Pokémon">
+  <div class="w-full">
+    <p-autocomplete
+      [(ngModel)]="searchText"
+      [suggestions]="filteredPokemons"
+      (completeMethod)="searchPokemons($event)"
+      field="name"
+      placeholder="Search for a Pokémon to add to favorites"
+      styleClass="w-full"
+      [showClear]="true"
+      (onSelect)="addFavorite($event.value)">
+      <ng-template let-pokemon pTemplate="item">
+        <div class="flex items-center p-4 rounded-lg  duration-300 ease-in-out transform hover:scale-105">
+          <img
+            [src]="pokemon.image"
+            alt="Pokemon Image"
+            class="w-16 h-16 rounded-full border-2 border-gray-300 shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110 mr-4" />
+          <span class="text-gray-800 font-medium text-lg hover:text-blue-500 transition-colors duration-300 ease-in-out">{{ pokemon.name | uppercase }}</span>
+        </div>
+      </ng-template>
+    </p-autocomplete>
+  </div>
+
+  <div *ngIf="favorites.length > 0; else noFavorites" class="mt-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+      <div *ngFor="let pokemon of favorites" class="p-4 border border-gray-300 rounded-lg shadow-md transition-transform duration-300 hover: scale-105">
+        <p class="text-center font-medium text-lg">{{ pokemon.name | titlecase }}</p>
+        <div class="relative mx-auto mb-2 justify-items-center">
+          <img
+            [src]="pokemon.image"
+            alt="{{ pokemon.name }} image"
+            class="rounded-xl transition-all duration-300 ease-in-out transform hover:scale-125 hover:opacity-90 h-full" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #noFavorites>
+    <div class="text-center mt-6">
+      <p class="text-gray-500">You have no favorite Pokémon yet. Start adding some!</p>
+    </div>
+  </ng-template>
+</p-card>

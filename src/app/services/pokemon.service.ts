@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { Pokemon } from '../model/pokemen.model';
 
-export interface Pokemon {
+export interface Pokemon1 {
   id: number;
   name: string;
   types: string[];
@@ -47,7 +48,7 @@ export class PokemonService {
       );
   }
 
-  getPokemonDetail(url: string): Observable<Pokemon> {
+  getPokemonDetail(url: string): Observable<any> {
     return this.http.get<any>(url).pipe(
       map((response: any) => {
         const types = response.types.map((typeInfo: any) => typeInfo.type.name);
@@ -65,13 +66,9 @@ export class PokemonService {
     );
   }
 
-  getPokemonDetails(id: number): Observable<any> {
+  getPokemonDetails(id: number): Observable<Pokemon> {
     const url = `${this.baseUrl}pokemon/${id}`;
-    return this.http.get<any>(url);
+    return this.http.get<Pokemon>(url);
   }
 
-  getPokemonQuery(query: string): Observable<any> {
-    const url = `${this.baseUrl}pokemon/${query}`;
-    return this.http.get<any>(url);
-  }
 }
