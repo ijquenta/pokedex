@@ -1,5 +1,5 @@
 <p-card>
-  <p-autocomplete
+  <!--<p-autocomplete
     [(ngModel)]="selectedPokemon"
     [suggestions]="filteredPokemons"
     (completeMethod)="searchPokemons($event)"
@@ -19,28 +19,94 @@
         <span class="text-gray-800 font-medium text-lg hover:text-blue-500 transition-colors duration-300 ease-in-out">{{ pokemon.name | uppercase }}</span>
       </div>
     </ng-template>
-
+  </p-autocomplete>-->
+  <p-autocomplete
+    [suggestions]="filteredPokemons"
+    [(ngModel)]="searchText"
+    (completeMethod)="applyFilters()"
+    field="name"
+    placeholder="Search for a Pokémon"
+    styleClass="w-full max-w-5xl mx-auto mt-6"
+    [showClear]="true">
   </p-autocomplete>
 </p-card>
 
-<p-card header="Selected Pokemon">
-<div *ngIf="selectedPokemon" class="pokemon-detail mt-6 text-center">
-  <h3 class="text-2xl font-bold">{{ selectedPokemon.name | uppercase }}</h3>
-  <img [src]="selectedPokemon.image" alt="Pokemon Image" class="w-40 h-40 rounded-full border-4 border-white shadow-lg mt-4" />
-</div>
+<p-card>
+  <p-dataview #dv [value]="filteredPokemons" [layout]="layout" [paginator]="true" [rows]="12">
+    <ng-template #header>
+      <div class="flex justify-center items-center">
+        <div class="flex gap-2">
+          <input type="text" pInputText [(ngModel)]="searchText" (input)="applyFilters()" placeholder="Search by name or number" class="w-full p-2" />
+          <p-dropdown [options]="types" [(ngModel)]="selectedType" placeholder="Select Type" (onChange)="applyFilters()" class="w-full" [filter]="true" [showClear]="true">
+            <ng-template let-type pTemplate="item">
+              <div class="relative flex items-center justify-center rounded-full p-1 shadow-sm mr-2" [style.background]="getTypeColor(type)" pTooltip="{{ type | titlecase }}" tooltipPosition="top" style="min-width: 30px; height: 30px;">
+                <img [src]="'assets/type-icons/png/' + type + '.png'" alt="{{ type }}" class="w-5 h-5 transform transition-transform duration-300 hover:scale-110" />
+              </div>
+              <span>{{ type | titlecase }}</span>
+            </ng-template>
+          </p-dropdown>
+          <p-dropdown [options]="alphabeticalOptions" [(ngModel)]="selectedAlphabetical" placeholder="Alphabetical" (onChange)="applyFilters()" class="w-full" [showClear]="true"></p-dropdown>
+        </div>
+      </div>
+    </ng-template>
 
-  <div *ngIf="!selectedPokemon">
-    No se encontre ningun resultado...
-  </div>
-
+    <ng-template #grid let-items>
+      <div class="grid grid-cols-12 gap-1">
+        <div *ngFor="let item of items" class="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2 p-2">
+          <div class="p-2 border border-surface-200 rounded-xl shadow-sm transform transition-all hover:scale-105 hover:shadow-lg flex flex-col h-full">
+            <div class="bg-red-50 flex justify-center rounded p-1 flex-1">
+              <div class="relative mx-auto">
+                <img [src]="item.image" alt="{{ item.name }}" class="rounded-xl transition-all duration-300 ease-in-out transform hover:scale-125 hover:shadow-md hover:opacity-90 w-full h-24 object-cover" />
+              </div>
+              <p-tag [value]="item.id" severity="danger" class="absolute" [style.left.px]="4" [style.top.px]="4" />
+            </div>
+            <div class="pt-3">
+              <div class="flex flex-col justify-between gap-1 flex-1">
+                <div>
+                  <div class="text-sm font-medium mt-1">{{ item.name | titlecase }}</div>
+                </div>
+                <div class="text-center text-xs mt-1">
+                  <div class="flex flex-wrap gap-1">
+                    <div class="relative flex items-center justify-center rounded-full p-1 shadow-sm" *ngFor="let type of item.types" [style.background]="getTypeColor(type)" pTooltip="{{ type | titlecase }}" tooltipPosition="top" style="min-width: 30px; height: 30px;">
+                      <img [src]="'assets/type-icons/png/' + type + '.png'" alt="{{ type }}" class="w-5 h-5 transform transition-transform duration-300 hover:scale-110" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2 mt-3">
+                <div class="flex gap-2 justify-center">
+                  <p-button icon="pi pi-info-circle" outlined [rounded]="true" severity="success" label="More Info" class="flex-auto text-xs" (click)="showDialog(item.id)"></p-button>
+                  <button pButton icon="pi pi-heart" outlined [rounded]="true" severity="danger" class="text-xs"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-dataview>
 </p-card>
 
 
+<p-dialog [(visible)]="display" [modal]="true" [style]="{ width: '50vw' }" header="Pokémon Details">
+  <div *ngIf="selectedPokemon">
+    <div class="text-lg font-medium">{{ selectedPokemon.name | titlecase }}</div>
+    <div class="text-sm">
+      <span class="font-semibold">Types:</span> {{ selectedPokemon.name }}
+    </div>
+    <div class="text-sm">
+      <span class="font-semibold">Weight:</span> {{ selectedPokemon.name }} kg
+    </div>
+    <div class="text-sm">
+      <span class="font-semibold">Height:</span> {{ selectedPokemon.name }} m
+    </div>
+    <div class="text-sm">
+      <span class="font-semibold">Stats:</span>
+      <ul>
+<!--        <li *ngFor="let stat of selectedPokemon.stats">{{ stat.name }}: {{ stat.value }}</li>-->
+      </ul>
+    </div>
+    <!-- Agrega más detalles según sea necesario -->
+  </div>
+</p-dialog>
 
-
-
-<!--  <ul>-->
-<!--    <li *ngFor="let pokemon of pokemons">-->
-<!--      {{ pokemon.name }}-->
-<!--    </li>-->
-<!--  </ul>-->

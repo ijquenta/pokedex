@@ -1,14 +1,31 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
-interface Pokemon {
+export interface Pokemon {
+  id: number;
   name: string;
-  url: string;
+  types: string[];
+  height: string;
+  weight: string;
+  image: string;
 }
 
 interface PokeApiResponse {
   results: Pokemon[];
+}
+
+interface PokemonDetails {
+  name: string;
+  height: number;
+  weight: number;
+  types: { type: { name: string } }[];
+  abilities: { ability: { name: string } }[];
+  stats: { stat: { name: string }; base_stat: number }[];
+  sprites: {
+    front_default: string;
+  };
 }
 
 @Injectable({
@@ -19,9 +36,33 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  getAllPokemon(offset: number = 0, limit: number = 20): Observable<PokeApiResponse> {
-    const url = `${this.baseUrl}pokemon?offset=${offset}&limit=${limit}`;
-    return this.http.get<PokeApiResponse>(url);
+  getPokemons(offset: number = 0, limit: number = 50): Observable<Pokemon[]> {
+    const url = `${this.baseUrl}/pokemon?offset=${offset}&limit=${limit}`;
+
+    return this.http.get<any>(url)
+      .pipe(
+        map((response: any) => response.results),
+        map((pokemons: any[]) => pokemons.map((pokemon: any) => this.getPokemonDetail(pokemon.url))),
+        switchMap((detailRequests: Observable<Pokemon>[]) => forkJoin(detailRequests))
+      );
+  }
+
+  getPokemonDetail(url: string): Observable<Pokemon> {
+    return this.http.get<any>(url).pipe(
+      map((response: any) => {
+        const types = response.types.map((typeInfo: any) => typeInfo.type.name);
+        const heightInMeters = (response.height / 10).toFixed(1);
+
+        return {
+          id: response.id,
+          name: response.name,
+          types: types,
+          height: `${heightInMeters}m`,
+          weight: response.weight + 'kg',
+          image: response.sprites.other.showdown.front_default
+        };
+      })
+    );
   }
 
   getPokemonDetails(id: number): Observable<any> {
@@ -29,7 +70,8 @@ export class PokemonService {
     return this.http.get<any>(url);
   }
 
-  getPokemons(query: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}pokemon?limit=100&offset=0`);
+  getPokemonQuery(query: string): Observable<any> {
+    const url = `${this.baseUrl}pokemon/${query}`;
+    return this.http.get<any>(url);
   }
 }
