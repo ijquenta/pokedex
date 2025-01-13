@@ -30,7 +30,6 @@ export class FavoritesComponent implements OnInit {
   loadFavorites(): void {
     const favorites = localStorage.getItem('favorites');
     this.favorites = favorites ? JSON.parse(favorites) : [];
-    console.log("favorites", this.favorites);
   }
 
   loadAllPokemons(): void {

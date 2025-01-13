@@ -46,7 +46,7 @@ export class PokedexComponent implements OnInit {
   display: boolean = false;
   loading: boolean = true;
   types: string[] = ['grass', 'fire', 'water', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy', 'steel', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'normal'];
-  selectedType: Types | null = null;
+  selectedType: string | null = null;
   alphabeticalOptions = [
     { label: 'A-Z', value: 'asc' },
     { label: 'Z-A', value: 'desc' }
@@ -77,7 +77,6 @@ export class PokedexComponent implements OnInit {
     this.pokemonService.getPokemons().subscribe((data: any) => {
       this.allPokemons = data;
       this.filteredPokemons = [...data];
-      console.log("allpokemons", this.allPokemons)
       this.loadFavorites();
       this.loading = false;
     });
@@ -114,10 +113,8 @@ export class PokedexComponent implements OnInit {
   }
 
   showDialog(id: number): void {
-    console.log("this.selec idd", id);
     this.pokemonService.getPokemonDetails(id).subscribe((pokemon: Pokemon) => {
       this.selectedPokemon = pokemon;
-      console.log("this.selec", this.selectedPokemon);
       this.display = true;
     });
   }
