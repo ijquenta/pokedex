@@ -11,21 +11,21 @@ Esta es una aplicación web de Pokédex construida utilizando la PokéAPI con he
 ## Capturas de Pantalla
 
 ### Pantalla Principal
-![Pantalla Principal](assets/screenshots/pantalla-principal.png)
+![Pantalla Principal](src/assets/screenshots/pantalla-principal.png)
 
 ### Opción de Guardar Favorito
-![Opción de Guardar Favorito](assets/screenshots/guardar-favorito.png)
-![Opción de Guardar Favorito](assets/screenshots/guardar-favorito2.png)
+![Opción de Guardar Favorito](src/assets/screenshots/guardar-favorito.png)
+![Opción de Guardar Favorito](src/assets/screenshots/guardar-favorito2.png)
 
 ### Ver Detalles de Pokémon
-![Ver Detalles de Pokémon](assets/screenshots/detalles-pokemon.png)
-![Ver Detalles de Pokémon](assets/screenshots/detalles-pokemon2.png)
+![Ver Detalles de Pokémon](src/assets/screenshots/detalles-pokemon.png)
+![Ver Detalles de Pokémon](src/assets/screenshots/detalles-pokemon2.png)
 
 ### Acerca del Proyecto
-![Acerca del Proyecto](assets/screenshots/acerca-del-proyecto.png)
+![Acerca del Proyecto](src/assets/screenshots/acerca-del-proyecto.png)
 
 ### Sección de Favoritos
-![Sección de Favoritos](assets/screenshots/favoritos.png)
+![Sección de Favoritos](src/assets/screenshots/favoritos.png)
 
 ## Características
 
