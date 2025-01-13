@@ -16,7 +16,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DropdownModule} from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabel } from 'primeng/floatlabel';
-import { Pokemon } from '../model/pokemen.model'
+import {Pokemon, Types} from '../model/pokemen.model'
 import { KnobModule } from 'primeng/knob';
 import { AccordionModule } from 'primeng/accordion';
 import { GalleriaModule } from 'primeng/galleria';
@@ -46,7 +46,7 @@ export class PokedexComponent implements OnInit {
   display: boolean = false;
   loading: boolean = true;
   types: string[] = ['grass', 'fire', 'water', 'electric', 'psychic', 'ice', 'dragon', 'dark', 'fairy', 'steel', 'fighting', 'flying', 'poison', 'ground', 'rock', 'bug', 'ghost', 'normal'];
-  selectedType: string | null = null;
+  selectedType: Types | null = null;
   alphabeticalOptions = [
     { label: 'A-Z', value: 'asc' },
     { label: 'Z-A', value: 'desc' }
@@ -125,7 +125,7 @@ export class PokedexComponent implements OnInit {
   applyFilters() {
     let filtered = [...this.allPokemons];
     if (this.selectedType) {
-      //filtered = filtered.filter(pokemon => pokemon.types.includes(this.selectedType));
+      // filtered = filtered.filter(pokemon => pokemon.types.includes(this.selectedType));
     }
     if (this.selectedAlphabetical) {
       filtered = filtered.sort((a, b) => {

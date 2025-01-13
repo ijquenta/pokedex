@@ -1,60 +1,60 @@
-# PokeDex
+# Pokédex: Aplicación Web
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.7.
+🚀 **Sobre el Proyecto Pokédex**
 
-## Development server
+Esta es una aplicación web de Pokédex construida utilizando la PokéAPI con herramientas como Angular, PrimeNG y Tailwind CSS. El objetivo de este proyecto es crear una aplicación web interactiva y responsiva para explorar los datos de los Pokémon. Los usuarios pueden buscar Pokémon, ver sus estadísticas, añadir a favoritos y descubrir detalles como tipos, habilidades, altura, peso y más. ¡Una forma divertida de conocer más sobre el mundo Pokémon! 🌍
 
-To start a local development server, run:
+## Demo
 
-```bash
-ng serve
-```
+[Demo de la Aplicación](https://pokedex-sigma-beryl.vercel.app/)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Capturas de Pantalla
 
-## Code scaffolding
+### Pantalla Principal
+![Pantalla Principal](assets/screenshots/pantalla-principal.png)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Opción de Guardar Favorito
+![Opción de Guardar Favorito](assets/screenshots/guardar-favorito.png)
+![Opción de Guardar Favorito](assets/screenshots/guardar-favorito2.png)
 
-```bash
-ng generate component component-name
-```
+### Ver Detalles de Pokémon
+![Ver Detalles de Pokémon](assets/screenshots/detalles-pokemon.png)
+![Ver Detalles de Pokémon](assets/screenshots/detalles-pokemon2.png)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Acerca del Proyecto
+![Acerca del Proyecto](assets/screenshots/acerca-del-proyecto.png)
 
-```bash
-ng generate --help
-```
+### Sección de Favoritos
+![Sección de Favoritos](assets/screenshots/favoritos.png)
 
-## Building
+## Características
 
-To build the project run:
+- **🔍 Búsqueda de Pokémon:** Los usuarios pueden buscar Pokémon por su nombre de forma rápida.
+- **⚡ Filtrar por Nombre y Tipo:** Puedes filtrar los Pokémon por su nombre o tipo para encontrar los que más te interesen.
+- **📊 Detalles de Pokémon:** Visualiza información detallada de cada Pokémon, como sus tipos, estadísticas y más.
+- **📱 Diseño Responsivo:** La aplicación se adapta a diferentes tamaños de pantalla para una experiencia óptima en todos los dispositivos.
+- **⭐ Favoritos:** Los usuarios pueden guardar sus Pokémon favoritos con solo presionar un botón en la tarjeta del Pokémon en la página principal. ¡Nunca más perderás a tu Pokémon favorito! 💖
 
-```bash
-ng build
-```
+## Tecnologías Utilizadas
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+- **Angular:** Un poderoso framework de front-end para crear aplicaciones dinámicas y rápidas.
+- **PrimeNG:** Una librería de componentes ricos de UI que mejoran la experiencia del usuario.
+- **Tailwind CSS:** Un framework CSS basado en utilidades que permite un diseño flexible y rápido.
+- **PokéAPI:** Una API pública que proporciona información detallada sobre los Pokémon, como sus estadísticas, tipos e imágenes.
 
-## Running unit tests
+## Cómo Usar
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+1. Navega a la página principal para buscar un Pokémon.
+2. Usa la barra de búsqueda para encontrar un Pokémon por su nombre o selecciona un filtro para reducir los resultados por tipo o por orden alfabético.
+3. Haz clic en cualquier Pokémon en la opción "Más Información" para ver información detallada como sus estadísticas, habilidades y más.
+4. Si te gusta un Pokémon, puedes agregarlo a tus favoritos haciendo clic en el botón de favoritos en su tarjeta. 🏆
 
-```bash
-ng test
-```
+## Contribuciones
 
-## Running end-to-end tests
+Si deseas contribuir a este proyecto, por favor sigue estos pasos:
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# pokedex
+1. Haz un fork del repositorio.
+2. Crea una nueva rama (`git checkout -b feature/nueva-caracteristica`).
+3. Realiza tus cambios y haz un commit (`git commit -m 'Añadir nueva característica'`).
+4. Haz push a la rama (`git push origin feature/nueva-caracteristica`).
+5. Abre un Pull Request.

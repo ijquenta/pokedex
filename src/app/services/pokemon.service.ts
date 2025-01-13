@@ -4,15 +4,6 @@ import { Observable, forkJoin } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Pokemon } from '../model/pokemen.model';
 
-export interface Pokemon1 {
-  id: number;
-  name: string;
-  types: string[];
-  height: string;
-  weight: string;
-  image: string;
-}
-
 interface PokeApiResponse {
   results: Pokemon[];
 }
@@ -37,7 +28,7 @@ export class PokemonService {
 
   constructor(private http: HttpClient) {}
 
-  getPokemons(offset: number = 0, limit: number = 50): Observable<Pokemon[]> {
+  getPokemons(offset: number = 0, limit: number = 100): Observable<Pokemon[]> {
     const url = `${this.baseUrl}/pokemon?offset=${offset}&limit=${limit}`;
 
     return this.http.get<any>(url)
