@@ -1,0 +1,25 @@
+<div *ngIf="loading" class="loading">Loading...</div>
+
+<div *ngIf="!loading && pokemonDetails" class="pokemon-details">
+  <h2>{{ pokemonDetails.name }}</h2>
+  <img [src]="pokemonDetails.sprites.front_default" alt="{{ pokemonDetails.name }}" class="pokemon-image" />
+
+  <div class="details">
+    <p><strong>Height:</strong> {{ pokemonDetails.height }} decimeters</p>
+    <p><strong>Weight:</strong> {{ pokemonDetails.weight }} hectograms</p>
+
+    <div class="abilities">
+      <strong>Abilities:</strong>
+      <ul>
+        <li *ngFor="let ability of pokemonDetails.abilities">{{ ability.ability.name }}</li>
+      </ul>
+    </div>
+
+    <div class="types">
+      <strong>Types:</strong>
+      <ul>
+        <li *ngFor="let type of pokemonDetails.types">{{ type.type.name }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+<p-card>
+  <p-autocomplete
+    [(ngModel)]="selectedPokemon"
+    [suggestions]="filteredPokemons"
+    (completeMethod)="searchPokemons($event)"
+    field="name"
+    placeholder="Search for a Pokémon"
+    styleClass="w-full max-w-5xl mx-auto mt-6"
+    scrollHeight="400px"
+    [dropdown]="true"
+    [showClear]="true">
+    <ng-template let-pokemon pTemplate="item">
+      <div class="flex items-center p-4 rounded-lg bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out transform hover:scale-105">
+        <img
+          [src]="pokemon.image"
+          alt="Pokemon Image"
+          class="w-16 h-16 rounded-full border-2 border-gray-300 shadow-md transition-transform duration-300 ease-in-out transform hover:scale-110 mr-4" />
+
+        <span class="text-gray-800 font-medium text-lg hover:text-blue-500 transition-colors duration-300 ease-in-out">{{ pokemon.name | uppercase }}</span>
+      </div>
+    </ng-template>
+
+  </p-autocomplete>
+</p-card>
+
+<p-card header="Selected Pokemon">
+<div *ngIf="selectedPokemon" class="pokemon-detail mt-6 text-center">
+  <h3 class="text-2xl font-bold">{{ selectedPokemon.name | uppercase }}</h3>
+  <img [src]="selectedPokemon.image" alt="Pokemon Image" class="w-40 h-40 rounded-full border-4 border-white shadow-lg mt-4" />
+</div>
+
+  <div *ngIf="!selectedPokemon">
+    No se encontre ningun resultado...
+  </div>
+
+</p-card>
+
+
+
+
+
+<!--  <ul>-->
+<!--    <li *ngFor="let pokemon of pokemons">-->
+<!--      {{ pokemon.name }}-->
+<!--    </li>-->
+<!--  </ul>-->
