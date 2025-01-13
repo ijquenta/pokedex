@@ -1,22 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';  // Para acceder al ID desde la ruta
-import { PokemonService } from '../services/pokemon.service';  // Importamos el servicio de Pokémon
-import { CommonModule } from '@angular/common';  // Importamos CommonModule
+import { ActivatedRoute } from '@angular/router';
+import { PokemonService } from '../services/pokemon.service';
+import { CommonModule } from '@angular/common';
+import { AccordionModule } from 'primeng/accordion';
+import {CardModule} from 'primeng/card';
+import {TagModule} from 'primeng/tag';
+
 
 @Component({
   selector: 'app-pokemon-details',
   templateUrl: './pokemon-details.component.html',
   styleUrls: ['./pokemon-details.component.css'],
-  imports: [CommonModule],  // Asegúrate de agregar CommonModule aquí
-  standalone: true,  // Si estás usando un componente standalone
+  imports: [CommonModule, AccordionModule, CardModule, TagModule],
+  standalone: true,
 })
 export class PokemonDetailsComponent implements OnInit {
-  pokemonDetails: any;  // Variable para almacenar los detalles del Pokémon
+  pokemonDetails: any;
   loading = true;
 
   constructor(
     private pokemonService: PokemonService,
-    private route: ActivatedRoute  // Inyectamos ActivatedRoute para obtener el ID de la URL
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {

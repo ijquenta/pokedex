@@ -1,4 +1,4 @@
-import { Component, OnInit, model } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { PokemonService } from '../services/pokemon.service';
 import { CommonModule } from '@angular/common';
 import { AutoCompleteModule } from 'primeng/autocomplete';
@@ -20,20 +20,12 @@ import { Pokemon } from '../model/pokemen.model'
 import { KnobModule } from 'primeng/knob';
 import { AccordionModule } from 'primeng/accordion';
 import { GalleriaModule } from 'primeng/galleria';
-import { signal } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-interface Pokemon1 {
-  name: string;
-  url: string;
-  image: string;
-  types: any;
-}
 
 interface PokemonImage {
   itemImageSrc: string;
 }
-
 
 @Component({
   selector: 'app-pokedex',
@@ -60,7 +52,7 @@ export class PokedexComponent implements OnInit {
     { label: 'Z-A', value: 'desc' }
   ];
   selectedAlphabetical: string | null = null;
-  selectedImageIndex = 0;  // Índice de la imagen seleccionada
+  selectedImageIndex = 0;
   favorites: any[] = [];
   pokemonImages = [
     { itemImageSrc: '', thumbnailImageSrc: '' }
@@ -80,6 +72,7 @@ export class PokedexComponent implements OnInit {
   ngOnInit(): void {
     this.getAllPokemons()
   }
+
   getAllPokemons(): void {
     this.pokemonService.getPokemons().subscribe((data: any) => {
       this.allPokemons = data;
@@ -89,30 +82,11 @@ export class PokedexComponent implements OnInit {
       this.loading = false;
     });
   }
+
   loadFavorites(): void {
     const favorites = localStorage.getItem('favorites');
     this.favorites = favorites ? JSON.parse(favorites) : [];
   }
-
-  /*searchPokemons(event: any): void {
-    const query = event.query.toLowerCase(); // Filtra por minúsculas para mayor precisión
-    if (query.length >= 1) { // Solo realiza la búsqueda si el query tiene al menos 3 caracteres
-      this.pokemonService.getPokemons(query).subscribe((data: any) => {
-        this.filteredPokemons = data.results
-          .filter((pokemon: any) =>
-            pokemon.name.toLowerCase().includes(query)
-          )
-          .map((pokemon: any) => ({
-            name: pokemon.name,
-            url: pokemon.url,
-            image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.url.split('/')[6]}.png`,
-            types: pokemon.types
-          }));
-      });
-    } else {
-      this.filteredPokemons = [];
-    }
-  }*/
 
   getTypeColor(type: string): string {
     const gradients: { [key: string]: string } = {
@@ -136,7 +110,7 @@ export class PokedexComponent implements OnInit {
       normal: 'linear-gradient(135deg, #A8A77A, #C8C6A6)',
     };
 
-    return gradients[type.toLowerCase()] || 'linear-gradient(135deg, #FFFFFF, #E0E0E0)'; // Degradado por defecto
+    return gradients[type.toLowerCase()] || 'linear-gradient(135deg, #FFFFFF, #E0E0E0)';
   }
 
   showDialog(id: number): void {
@@ -150,11 +124,9 @@ export class PokedexComponent implements OnInit {
 
   applyFilters() {
     let filtered = [...this.allPokemons];
-
     if (this.selectedType) {
       //filtered = filtered.filter(pokemon => pokemon.types.includes(this.selectedType));
     }
-
     if (this.selectedAlphabetical) {
       filtered = filtered.sort((a, b) => {
         if (this.selectedAlphabetical === 'asc') {
@@ -176,42 +148,33 @@ export class PokedexComponent implements OnInit {
   }
 
   findPokemonByName(): void {
-    const query = this.searchText?.trim().toLowerCase(); // Asegurarse de manejar mayúsculas y espacios
+    const query = this.searchText?.trim().toLowerCase();
     if (!query) {
-      this.filteredPokemons = [...this.allPokemons]; // Mostrar todos si no hay búsqueda
+      this.filteredPokemons = [...this.allPokemons];
       return;
     }
-
     this.filteredPokemons = this.allPokemons.filter(pokemon => {
-      // Validar que la URL exista antes de dividirla
       const id = pokemon.url ? pokemon.url.split('/').filter(segment => segment).pop() : null;
-
       return (
-        pokemon.name.toLowerCase().includes(query) || // Buscar por nombre parcial
-        id === query // Buscar por número exacto
+        pokemon.name.toLowerCase().includes(query) ||
+        id === query
       );
     });
-
-    console.log("Filtered Pokémons:", this.filteredPokemons);
   }
 
   saveFavorite(pokemon: Pokemon): void {
     const favorites = this.getFavorites();
     const index = favorites.findIndex(fav => fav.id === pokemon.id);
-
     if (index === -1) {
-      // Add to favorites
       favorites.push(pokemon);
       localStorage.setItem('favorites', JSON.stringify(favorites));
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Pokemon added to favorites' });
     } else {
-      // Remove from favorites
       favorites.splice(index, 1);
       localStorage.setItem('favorites', JSON.stringify(favorites));
       this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Pokemon removed from favorites' });
     }
-
-    this.loadFavorites(); // Refresh the favorites list
+    this.loadFavorites();
   }
 
   isFavorite(pokemon: Pokemon): boolean {

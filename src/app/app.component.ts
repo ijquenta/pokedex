@@ -17,10 +17,6 @@ import {FooterComponent} from './footer/footer.component';
 export class AppComponent {
   constructor(private messageService: MessageService) {}
   title = 'poke-dex';
-
-  show() {
-    this.messageService.add({ severity: 'info', summary: 'Info', detail: 'Message Content', life: 3000 });
-  }
 }
 
 

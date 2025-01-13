@@ -26,7 +26,7 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  items: MenuItem[] = []; // Define los ítems del menú como un array de `MenuItem`
+  items: MenuItem[] = [];
 
   ngOnInit(): void {
     this.items = [

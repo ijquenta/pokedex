@@ -1,25 +1,39 @@
-<div *ngIf="loading" class="loading">Loading...</div>
-
+<div *ngIf="loading" class="loading text-center text-lg font-semibold">Loading...</div>
 <div *ngIf="!loading && pokemonDetails" class="pokemon-details">
-  <h2>{{ pokemonDetails.name }}</h2>
-  <img [src]="pokemonDetails.sprites.front_default" alt="{{ pokemonDetails.name }}" class="pokemon-image" />
+  <p-card class="mb-4">
+    <h2 class="text-3xl font-bold text-center capitalize">{{ pokemonDetails.name | titlecase }}</h2>
 
-  <div class="details">
-    <p><strong>Height:</strong> {{ pokemonDetails.height }} decimeters</p>
-    <p><strong>Weight:</strong> {{ pokemonDetails.weight }} hectograms</p>
-
-    <div class="abilities">
-      <strong>Abilities:</strong>
-      <ul>
-        <li *ngFor="let ability of pokemonDetails.abilities">{{ ability.ability.name }}</li>
-      </ul>
+    <div class="flex justify-center mb-4">
+      <img [src]="pokemonDetails.sprites.front_default" alt="{{ pokemonDetails.name }}" class="pokemon-image rounded-lg shadow-lg w-32 h-32 object-cover" />
     </div>
 
-    <div class="types">
-      <strong>Types:</strong>
-      <ul>
-        <li *ngFor="let type of pokemonDetails.types">{{ type.type.name }}</li>
-      </ul>
+    <div class="flex justify-center">
+      <p-tag [value]="'' + pokemonDetails.id" severity="danger" class="mb-4"></p-tag>
     </div>
-  </div>
+
+    <p-accordion>
+      <p-accordion-panel header="Details">
+        <div class="details space-y-4">
+          <p class="text-lg"><strong>Height:</strong> {{ pokemonDetails.height }} decimeters</p>
+          <p class="text-lg"><strong>Weight:</strong> {{ pokemonDetails.weight }} hectograms</p>
+        </div>
+      </p-accordion-panel>
+
+      <p-accordion-panel header="Abilities">
+        <div class="abilities">
+          <ul class="list-disc list-inside">
+            <li *ngFor="let ability of pokemonDetails.abilities" class="text-md">{{ ability.ability.name | titlecase }}</li>
+          </ul>
+        </div>
+      </p-accordion-panel>
+
+      <p-accordion-panel header="Types">
+        <div class="types">
+          <ul class="list-disc list-inside">
+            <li *ngFor="let type of pokemonDetails.types" class="text-md">{{ type.type.name | titlecase }}</li>
+          </ul>
+        </div>
+      </p-accordion-panel>
+    </p-accordion>
+  </p-card>
 </div>

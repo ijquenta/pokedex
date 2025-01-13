@@ -18,7 +18,7 @@ export class FavoritesComponent implements OnInit {
   favorites: any[] = [];
   filteredPokemons: any[] = [];
   searchText: string = '';
-  allPokemons: any[] = []; // Store all Pokémon for autocomplete
+  allPokemons: any[] = [];
 
   constructor(private pokemonService: PokemonService) {}
 
@@ -51,7 +51,7 @@ export class FavoritesComponent implements OnInit {
     if (!favorites.some(fav => fav.id === pokemon.id)) {
       favorites.push(pokemon);
       localStorage.setItem('favorites', JSON.stringify(favorites));
-      this.loadFavorites(); // Refresh the favorites list
+      this.loadFavorites();
     }
   }
 

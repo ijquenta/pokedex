@@ -12,6 +12,6 @@ export class PageNotFoundComponent {
   constructor(private router: Router) {}
 
   goHome() {
-    this.router.navigate(['/']); // Adjust the route as necessary
+    this.router.navigate(['/']);
   }
 }
